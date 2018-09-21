@@ -41,7 +41,7 @@ var fillTemporaryHome = function(temporaryHome, source) {
 
 var setupNPM = function() {
   var prefix = path.resolve(path.join(__dirname, '../test/fixtures/node_install'));
-  return npm.loadAsync({ global: true }).then(function() {
+  return npm.loadAsync({ global: true, progress: false }).then(function() {
     npm.prefix = prefix;
   });
 };
@@ -371,7 +371,7 @@ describe('avn setup', function() {
         'avn: configuration complete (~/.avnrc)',
         'avn: installation complete',
       ]);
-      expect(std.err).to.match(/^error: EACCES.*, open '[\/\w-]*\/.bash_profile'\n$/);
+      expect(std.err).to.match(/^error: EACCES.*, open '[\/\w-\d\.]*\/.bash_profile'\n$/);
     });
   });
 });
